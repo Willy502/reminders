@@ -13,6 +13,11 @@ class RemindersPage extends StatelessWidget {
         backgroundColor: preferences.colorSecundario ? Colors.indigo : Colors.blue,
       ),
       drawer: DrawerWidget(),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: preferences.colorSecundario ? Colors.indigo : Colors.blue,
+        onPressed: () => Navigator.pushNamed(context, 'new_reminder')
+      ),
     );
   }
 }
