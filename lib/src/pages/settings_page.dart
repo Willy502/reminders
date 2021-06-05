@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reminders/src/widgets/drawer_widget.dart';
 
 class SettingsPage extends StatelessWidget {
 
@@ -8,6 +9,7 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Settings'),
       ),
+      drawer: DrawerWidget(),
     );
   }
 }
