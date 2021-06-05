@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:reminders/src/bloc/reminder_bloc.dart';
+import 'package:reminders/src/models/reminder_model.dart';
 import 'package:reminders/src/shared/user_preferences.dart';
 
 class NewReminderPage extends StatelessWidget {
@@ -6,6 +8,7 @@ class NewReminderPage extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _detailController = TextEditingController();
   final preferences = UserPreferences();
+  final remindersBloc = RemindersBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,8 @@ class NewReminderPage extends StatelessWidget {
     final String detail = _detailController.text;
 
     if (name != "" && detail != "") {
-      // AQUI GUARDO EL REMINDER
+      final reminder = ReminderModel(name: name, detail: detail);
+      remindersBloc.addReminder(reminder);
       Navigator.pop(context);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Faltan datos')));
