@@ -9,6 +9,9 @@ class RemindersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    remindersBloc.getReminders();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Reminders'),
@@ -41,14 +44,27 @@ class RemindersPage extends StatelessWidget {
 
         return ListView.builder(
           itemCount: reminders.length,
-          itemBuilder: (context, position) => Column(
-            children: [
-              ListTile(
-                title: Text(reminders[position].name),
-                subtitle: Text(reminders[position].detail),
+          itemBuilder: (context, position) => Dismissible(
+            key: UniqueKey(),
+            background: Container(
+              color: Colors.red,
+              child: Row(
+                children: [
+                  SizedBox(width: 16.0),
+                  Icon(Icons.delete, color: Colors.white)
+                ],
               ),
-              Divider()
-            ],
+            ),
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text(reminders[position].name),
+                  subtitle: Text(reminders[position].detail),
+                ),
+                Divider()
+              ],
+            ),
+            onDismissed: (direction) => remindersBloc.deleteReminder(reminders[position].id)
           )
         );
       }
